@@ -2,7 +2,6 @@ package database
 
 import (
 	"context"
-	"log"
 	"fmt"
 	
 	"go.mongodb.org/mongo-driver/bson"
@@ -12,7 +11,6 @@ import (
 func DeleteAllTask() (int64, error) {
 	d, err := collection.DeleteMany(context.Background(), bson.D{{}}, nil)
 	if err != nil {
-		log.Fatal(err)
 		return 0, err
 	}
 

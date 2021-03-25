@@ -10,16 +10,19 @@ import (
 )
 
 // delete one task from the DB, delete by ID
-func DeleteOneTask(task string) (string, error) {
+func DeleteOneTask(task string) (bool, error) {
 	fmt.Println(task)
-	id, _ := primitive.ObjectIDFromHex(task)
+	id, e := primitive.ObjectIDFromHex(task)
+	if e != nil {
+		// Cant do anything without id so exits program
+		log.Fatal(e)
+	}
 	filter := bson.M{"_id": id}
 	d, err := collection.DeleteOne(context.Background(), filter)
 	if err != nil {
-		log.Fatal(err)
-		return "Error", err
+		return false, err
 	}
 
 	fmt.Println("Deleted Document", d.DeletedCount)
-	return "Deleted", nil
+	return true, nil
 }

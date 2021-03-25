@@ -2,7 +2,6 @@ package database
 
 import (
 	"context"
-	"log"
 	"fmt"
 	
 	"go.mongodb.org/mongo-driver/bson"
@@ -10,17 +9,16 @@ import (
 )
 
 // task undo method, update task's status to false
-func UndoTask(task string) (string, error) {
+func UndoTask(task string) (bool, error) {
 	fmt.Println(task)
 	id, _ := primitive.ObjectIDFromHex(task)
 	filter := bson.M{"_id": id}
 	update := bson.M{"$set": bson.M{"status": false}}
 	result, err := collection.UpdateOne(context.Background(), filter, update)
 	if err != nil {
-		log.Fatal(err)
-		return "Error", err
+		return false, err
 	}
 
 	fmt.Println("modified count: ", result.ModifiedCount)
-	return "Undid Task", nil
+	return true, nil
 }

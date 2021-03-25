@@ -14,6 +14,7 @@ func GetAllTask(w http.ResponseWriter, r *http.Request) {
 	payload, err := database.GetTasks()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+	} else {
+		json.NewEncoder(w).Encode(payload)
 	}
-	json.NewEncoder(w).Encode(payload)
 }

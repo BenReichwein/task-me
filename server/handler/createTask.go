@@ -2,7 +2,6 @@ package handler
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 	"server/database"
 	"server/models"
@@ -17,14 +16,10 @@ func CreateTask(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	var task models.ToDoList
 	_ = json.NewDecoder(r.Body).Decode(&task)
-	// fmt.Println(task, r.Body)
 	_, err := database.InsertOneTask(task)
 	if err != nil {
-		log.Fatal(err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+	} else {
+		json.NewEncoder(w).Encode(task)
 	}
-	
-
-
-	json.NewEncoder(w).Encode(task)
 }

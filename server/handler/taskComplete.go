@@ -20,6 +20,7 @@ func TaskComplete(w http.ResponseWriter, r *http.Request) {
 	_, err := database.TaskComplete(params["id"])
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+	} else {
+		json.NewEncoder(w).Encode(params["id"])
 	}
-	json.NewEncoder(w).Encode(params["id"])
 }
