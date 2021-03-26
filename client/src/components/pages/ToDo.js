@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { Card, Header, Form, Input, Icon, Button } from "semantic-ui-react";
-import { getTasks, createTask } from '../../actions';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+//import Col from 'react-bootstrap/Col'
+import { getTasks, createTask, updateTask, undoTask, deleteTask } from '../../actions';
 
 class ToDo extends Component {
     constructor(props) {
@@ -22,89 +24,76 @@ class ToDo extends Component {
     onSubmit = async () => {
         let { task } = this.state;
         await this.props.createTask(task)
-        this.getTask();
+        this.props.getTasks();
       };
 
     componentDidMount = async () => {
-        this.getTask();
+      await this.props.getTasks();
     }
 
-    getTask = async () => {
-        await this.props.getTasks();
-        if (this.props.task) {
-            this.setState({
-              items: this.props.task.map((item) => {
-                let color = "yellow";
-                let style = {
-                  wordWrap: "break-word",
-                };
-    
-                if (item.status) {
-                  color = "green";
-                  style["textDecorationLine"] = "line-through";
-                }
-    
-                return (
-                  <Card key={item._id} color={color} fluid>
-                    <Card.Content>
-                      <Card.Header textAlign="left">
-                        <div style={style}>{item.task}</div>
-                      </Card.Header>
-    
-                      <Card.Meta textAlign="right">
-                        <Icon
-                          name="check circle"
-                          color="green"
-                          onClick={() => this.updateTask(item._id)}
-                        />
-                        <span style={{ paddingRight: 10 }}>Done</span>
-                        <Icon
-                          name="undo"
-                          color="yellow"
-                          onClick={() => this.undoTask(item._id)}
-                        />
-                        <span style={{ paddingRight: 10 }}>Undo</span>
-                        <Icon
-                          name="delete"
-                          color="red"
-                          onClick={() => this.deleteTask(item._id)}
-                        />
-                        <span style={{ paddingRight: 10 }}>Delete</span>
-                      </Card.Meta>
-                    </Card.Content>
-                  </Card>
-                );
-              }),
-            });
-        }
-    };
-
     render() {
+      let {task} = this.props
         return (
-            <div>
-                <div className="row">
-                <Header className="header" as="h2">
-                    TO DO LIST
-                </Header>
-                </div>
-                <div className="row">
-                <Form onSubmit={this.onSubmit}>
-                    <Input
-                    type="text"
-                    name="task"
-                    onChange={this.handleInputChange}
-                    value={this.state.task}
-                    required
-                    fluid
-                    placeholder="Create Task"
-                    />
-                    <Button>Create Task</Button>
-                </Form>
-                </div>
-                <div className="row">
-                <Card.Group>{this.state.items}</Card.Group>
-                </div>
-            </div>
+            <Container fluid style={{ 'marginTop': '5.5rem' }}>
+                <Row className="justify-content-around">
+                  <h2 className="header">
+                      TO DO LIST
+                  </h2>
+                </Row>
+                <Row className="justify-content-around">
+                  <form onSubmit={this.onSubmit}>
+                      <input
+                      type="text"
+                      name="task"
+                      onChange={this.handleInputChange}
+                      value={this.state.task}
+                      required
+                      placeholder="Create Task"
+                      />
+                      <button>Create Task</button>
+                  </form>
+                </Row>
+                <Row>{this.state.items}</Row>
+                {task ?
+                task.map(item => (
+                  <Container key={item._id} style={item.status ? {color: 'green'} : {color: 'orange'}} fluid>
+                      <Row>
+                        <div style={item.status ? {textDecorationLine: 'line-through'} : {wordWrap: 'break-word'}}>{item.task}</div>
+                      </Row>
+    
+                      <Row>
+                        <button
+                        style={{ marginRight: 10, color: 'green'}}
+                        onClick={() => this.props.updateTask(item._id)}
+                        >
+                        <i
+                          className="fas fa-check"
+                        />
+                        Done
+                        </button>
+                        <button
+                        style={{ marginRight: 10, color: 'orange'}}
+                        onClick={() => this.props.undoTask(item._id)}
+                        >
+                        <i
+                          className="fas fa-undo"
+                        />
+                        Undo
+                        </button>
+                        <button
+                        style={{ marginRight: 10, color: 'orangered'}}
+                        onClick={() => this.props.deleteTask(item._id)}
+                        >
+                        <i
+                          className="fas fa-trash"
+                        />
+                        Delete
+                        </button>
+                      </Row>
+                  </Container>
+                )) : <div>test</div>
+                }
+            </Container>
         )
     }
 }
@@ -118,5 +107,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { getTasks, createTask }
+  { getTasks, createTask, updateTask, undoTask, deleteTask }
 )(ToDo);

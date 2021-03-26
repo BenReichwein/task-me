@@ -18,9 +18,42 @@ export const createTask = (task) => async (dispatch) => {
       task
     })
     .then(async (res) => {
-        dispatch({ type: TASK, payload: res.data});
+      dispatch({ type: TASK, payload: res.data});
     })
     .catch(err => {
-        alert(err.response.data)
+      alert(err.response.data)
     })
-  };
+};
+// update task
+export const updateTask = (id) => (dispatch) => {
+  api.put(`task/${id}`)
+  .then((res) => {
+    console.log(res)
+    dispatch(getTasks())
+  })
+  .catch(err => {
+    alert(err.response.data)
+  })
+};
+// undo task
+export const undoTask = (id) => (dispatch) => {
+  api.put(`undoTask/${id}`)
+  .then((res) => {
+    console.log(res)
+    dispatch(getTasks())
+  })
+  .catch(err => {
+    alert(err.response.data)
+  })
+};
+// delete task
+export const deleteTask = (id) => (dispatch) => {
+  api.delete(`deleteTask/${id}`)
+  .then((res) => {
+    console.log(res)
+    dispatch(getTasks())
+  })
+  .catch(err => {
+    alert(err.response.data)
+  })
+};
