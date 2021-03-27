@@ -1,7 +1,7 @@
 package router
 
 import (
-	"server/handler"
+	"server/controllers"
 
 	"github.com/gorilla/mux"
 )
@@ -11,11 +11,13 @@ func Router() *mux.Router {
 
 	router := mux.NewRouter()
 
-	router.HandleFunc("/api/task", handler.GetAllTask).Methods("GET", "OPTIONS")
-	router.HandleFunc("/api/task", handler.CreateTask).Methods("POST", "OPTIONS")
-	router.HandleFunc("/api/task/{id}", handler.TaskComplete).Methods("PUT", "OPTIONS")
-	router.HandleFunc("/api/undoTask/{id}", handler.UndoTask).Methods("PUT", "OPTIONS")
-	router.HandleFunc("/api/deleteTask/{id}", handler.DeleteTask).Methods("DELETE", "OPTIONS")
-	router.HandleFunc("/api/deleteAllTask", handler.DeleteAllTask).Methods("DELETE", "OPTIONS")
+	router.HandleFunc("/api/task", controllers.GetAllTask).Methods("GET", "OPTIONS")
+	router.HandleFunc("/api/task", controllers.CreateTask).Methods("POST", "OPTIONS")
+	router.HandleFunc("/api/user/login", controllers.LoginHandler).Methods("POST", "OPTIONS")
+	router.HandleFunc("/api/user/register", controllers.RegisterHandler).Methods("POST", "OPTIONS")
+	router.HandleFunc("/api/task/{id}", controllers.TaskComplete).Methods("PUT", "OPTIONS")
+	router.HandleFunc("/api/undoTask/{id}", controllers.UndoTask).Methods("PUT", "OPTIONS")
+	router.HandleFunc("/api/deleteTask/{id}", controllers.DeleteTask).Methods("DELETE", "OPTIONS")
+	router.HandleFunc("/api/deleteAllTask", controllers.DeleteAllTask).Methods("DELETE", "OPTIONS")
 	return router
 }

@@ -91,7 +91,7 @@ class ToDo extends Component {
                         </button>
                       </Row>
                   </Container>
-                )) : <div>test</div>
+                )) : <div></div>
                 }
             </Container>
         )
