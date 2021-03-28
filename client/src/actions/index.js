@@ -1,4 +1,4 @@
-// import history from '../history'
+import history from '../history'
 import api from './api'
 import {
     TASK,
@@ -52,6 +52,36 @@ export const deleteTask = (id) => (dispatch) => {
   .then((res) => {
     console.log(res)
     dispatch(getTasks())
+  })
+  .catch(err => {
+    alert(err.response.data)
+  })
+};
+//
+//-> Authentications
+//
+// making an account
+export const register = (formValues) => () => {
+  api.post('user/register', {
+    username: formValues.username.toLowerCase(),
+    password: formValues.password
+  })
+  .then(res => {
+    alert(res.data)
+    history.push('/login')
+  })
+  .catch(err => {
+    alert(err.response.data)
+  })
+};
+// logging into existing account
+export const login = (formValues) => () => {
+  api.post('user/login', {
+    username: formValues.username.toLowerCase(),
+    password: formValues.password
+  })
+  .then(res => {
+    history.push('/')
   })
   .catch(err => {
     alert(err.response.data)

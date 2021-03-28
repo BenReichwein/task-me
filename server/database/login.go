@@ -33,7 +33,7 @@ func Login(user models.User) (models.User, models.ResponseResult) {
 		"username":  result.Username,
 	})
 
-	tokenString, err := token.SignedString([]byte("secret"))
+	tokenString, err := token.SignedString([]byte("TaskMe4224"))
 
 	if err != nil {
 		res.Error = "Error while generating token,Try again"

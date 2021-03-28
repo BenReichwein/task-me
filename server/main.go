@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"github.com/rs/cors"
 
 	"server/database"
 	"server/helpers"
@@ -18,5 +19,14 @@ func main() {
 	helpers.LoadDotEnv()
 	database.Connect()
 
-	log.Fatal(http.ListenAndServe(":8080", r))
+	c := cors.New(cors.Options{
+        AllowedOrigins: []string{"http://localhost:3000"},
+		AllowedMethods: []string{"GET", "HEAD", "POST", "PUT", "OPTIONS"},
+        AllowCredentials: true,
+		AllowedHeaders: []string{"X-Requested-With", "Content-Type"},
+    })
+
+    handler := c.Handler(r)
+
+	log.Fatal(http.ListenAndServe(":8080", handler))
 }

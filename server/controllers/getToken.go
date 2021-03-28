@@ -17,7 +17,7 @@ var jwtKey = []byte("TaskMe4224")
 // Checks if users token is ok
 func GetToken(w http.ResponseWriter, r *http.Request) {
 	c, err := r.Cookie("authToken")
-	fmt.Println(c)
+	fmt.Println(c.Value)
 	if err != nil {
 		if err == http.ErrNoCookie {
 			// If the cookie is not set, return an unauthorized status
@@ -47,6 +47,7 @@ func GetToken(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusUnauthorized)
 			return
 		}
+		fmt.Println(err, "probably because you don't have your secrets the same")
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
