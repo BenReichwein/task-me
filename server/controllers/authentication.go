@@ -57,6 +57,12 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	if res.Error != "" {
 		json.NewEncoder(w).Encode(res)
 	} else {
+		c := http.Cookie{
+			Name: "authToken",
+			Value: result.Token,
+			HttpOnly: true,
+		}
+		http.SetCookie(w, &c)
 		json.NewEncoder(w).Encode(result)
 	}
 }

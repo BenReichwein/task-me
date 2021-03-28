@@ -9,9 +9,10 @@ type ToDoList struct {
 }
 
 type User struct{
-	Username  string `json:"username"`
-	Password  string `json:"password"`
-	Token     string `json:"token"`
+	ID        primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
+	Username  string             `json:"username"`
+	Password  string             `json:"password"`
+	Token     string             `json:"token"`
 }
 
 type ResponseResult struct {

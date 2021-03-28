@@ -12,7 +12,7 @@ import (
 func Register(user models.User) (models.ResponseResult) {
 	var result models.User
 	var res models.ResponseResult
-	err := collection.FindOne(context.TODO(), bson.M{"username": user.Username}).Decode(&result)
+	err := authColl.FindOne(context.TODO(), bson.M{"username": user.Username}).Decode(&result)
 	if err != nil {
 		if err.Error() == "mongo: no documents in result" {
 			hash, err := bcrypt.GenerateFromPassword([]byte(user.Password), 5)
@@ -24,7 +24,7 @@ func Register(user models.User) (models.ResponseResult) {
 				user.Password = string(hash)
 			}
 
-			_, err = collection.InsertOne(context.TODO(), user)
+			_, err = authColl.InsertOne(context.TODO(), user)
 			if err != nil {
 				res.Error = "Error While Creating User, Try Again"
 				return res
