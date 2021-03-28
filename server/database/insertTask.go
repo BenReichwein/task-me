@@ -7,8 +7,8 @@ import (
 )
 
 // Insert one task in the DB
-func InsertOneTask(task models.ToDoList) (bool, error) {
-	insertResult, err := collection.InsertOne(context.Background(), task)
+func InsertOneTask(task models.User) (bool, error) {
+	insertResult, err := authColl.InsertOne(context.Background(), task.Tasks)
 
 	if err != nil {
 		return false, err

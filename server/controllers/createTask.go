@@ -9,7 +9,7 @@ import (
 
 // CreateTask create task route
 func CreateTask(w http.ResponseWriter, r *http.Request) {
-	var task models.ToDoList
+	var task models.User
 	_ = json.NewDecoder(r.Body).Decode(&task)
 	_, err := database.InsertOneTask(task)
 	if err != nil {
