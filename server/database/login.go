@@ -2,11 +2,12 @@ package database
 
 import (
 	"context"
+	"fmt"
 	"server/models"
 
+	jwt "github.com/dgrijalva/jwt-go"
 	"go.mongodb.org/mongo-driver/bson"
 	"golang.org/x/crypto/bcrypt"
-	jwt "github.com/dgrijalva/jwt-go"
 )
 
 // Logs in user to the database
@@ -14,7 +15,7 @@ func Login(user models.User) (models.User, models.ResponseResult) {
 	var result models.User
 	var res models.ResponseResult
 
-	err := authColl.FindOne(context.TODO(), bson.M{"username": user.Username}).Decode(&result)
+	err := collection.FindOne(context.TODO(), bson.M{"username": user.Username}).Decode(&result)
 
 	if err != nil {
 		res.Error = "Invalid username"
@@ -28,6 +29,8 @@ func Login(user models.User) (models.User, models.ResponseResult) {
 		return result, res
 	}
 
+	fmt.Println(result.ID)
+
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"id": result.ID,
 		"username":  result.Username,
@@ -40,7 +43,7 @@ func Login(user models.User) (models.User, models.ResponseResult) {
 		return result, res
 	}
 
-	_, err = authColl.UpdateOne(
+	_, err = collection.UpdateOne(
 		context.TODO(),
 		bson.M{"username": user.Username},
 		bson.D{

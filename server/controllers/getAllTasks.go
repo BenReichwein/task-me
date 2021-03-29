@@ -8,7 +8,7 @@ import (
 
 // GetAllTask get all the task route
 func GetAllTask(w http.ResponseWriter, r *http.Request) {
-	payload, err := database.GetTasks()
+	payload, err := database.GetTasks(Username)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	} else {

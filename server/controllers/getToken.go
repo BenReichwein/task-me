@@ -13,11 +13,11 @@ type Claims struct {
 }
 
 var jwtKey = []byte("TaskMe4224")
+var Username string
 
 // Checks if users token is ok
 func GetToken(w http.ResponseWriter, r *http.Request) {
 	c, err := r.Cookie("authToken")
-	fmt.Println(c.Value)
 	if err != nil {
 		if err == http.ErrNoCookie {
 			// If the cookie is not set, return an unauthorized status
@@ -58,5 +58,6 @@ func GetToken(w http.ResponseWriter, r *http.Request) {
 
 	// Finally, return the welcome message to the user, along with their
 	// username given in the token
+	Username = claims.Username
 	w.Write([]byte(fmt.Sprintf("Welcome %s!", claims.Username)))
 }

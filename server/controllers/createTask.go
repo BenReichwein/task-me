@@ -9,9 +9,9 @@ import (
 
 // CreateTask create task route
 func CreateTask(w http.ResponseWriter, r *http.Request) {
-	var task models.User
+	var task models.ToDoList
 	_ = json.NewDecoder(r.Body).Decode(&task)
-	_, err := database.InsertOneTask(task)
+	_, err := database.InsertOneTask(task, Username)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	} else {

@@ -12,7 +12,6 @@ import (
 
 // collection object/instance - used across database package
 var collection *mongo.Collection
-var authColl *mongo.Collection
 
 // connect to mongodb
 func Connect() {
@@ -40,7 +39,6 @@ func Connect() {
 	fmt.Println("Connected to MongoDB!")
 
 	collection = client.Database(dbName).Collection(collName)
-	authColl = client.Database(dbName).Collection("user")
 
 	fmt.Println("Collection instance created!")
 }

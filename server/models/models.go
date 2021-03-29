@@ -13,7 +13,7 @@ type User struct{
 	Username  string             `json:"username"`
 	Password  string             `json:"password"`
 	Token     string             `json:"token"`
-	Tasks	  []ToDoList
+	Tasks	  []ToDoList         `json:"tasks,omitempty" bson:"tasks,omitempty"`
 }
 
 type ResponseResult struct {
