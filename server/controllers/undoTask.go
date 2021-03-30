@@ -7,7 +7,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// UndoTask undo the complete task route
+// undo the complete task route
 func UndoTask(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	_, err := database.UndoTask(params["id"])

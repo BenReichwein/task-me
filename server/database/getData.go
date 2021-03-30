@@ -2,15 +2,16 @@ package database
 
 import (
 	"context"
-	"fmt"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 // get all task from the DB and return it
-func GetTasks(User string) ([]primitive.M, error) {
-	cur, err := collection.Find(context.Background(), bson.M{"username": User})
+func GetData(User string) ([]primitive.M, error) {
+	cur, err := collection.Find(
+		context.Background(), 
+		bson.M{"username": "benny"})
 	if err != nil {
 		return nil, err
 	}
@@ -44,6 +45,5 @@ func GetTasks(User string) ([]primitive.M, error) {
 		return nil, err
 	}
 	cur.Close(context.Background())
-	fmt.Println(results)
 	return results, nil
 }

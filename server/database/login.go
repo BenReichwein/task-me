@@ -43,18 +43,6 @@ func Login(user models.User) (models.User, models.ResponseResult) {
 		return result, res
 	}
 
-	_, err = collection.UpdateOne(
-		context.TODO(),
-		bson.M{"username": user.Username},
-		bson.D{
-			{"$set", bson.D{{Key: "token", Value: tokenString}}},
-		},
-	)
-	if err != nil {
-		res.Error = "Error While Adding Token, Try Again"
-		return result, res
-	}
-
 	result.Token = tokenString
 	result.Password = ""
 	return result, res

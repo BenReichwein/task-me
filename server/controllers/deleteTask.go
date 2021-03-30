@@ -7,7 +7,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// DeleteTask delete one task route
+// delete one task route
 func DeleteTask(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	_, err := database.DeleteOneTask(params["id"])

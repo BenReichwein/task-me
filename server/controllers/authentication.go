@@ -10,7 +10,7 @@ import (
 	"server/models"
 )
 
-
+// Registers user
 func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
@@ -37,7 +37,7 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Println(res)
 }
-
+// Logs in user
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")

@@ -6,7 +6,7 @@ import (
 	"server/database"
 )
 
-// DeleteAllTask delete all tasks route
+// delete all tasks route
 func DeleteAllTask(w http.ResponseWriter, r *http.Request) {
 	count, err := database.DeleteAllTask()
 	if err != nil {

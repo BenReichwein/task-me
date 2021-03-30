@@ -7,7 +7,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// TaskComplete update task route
+// update task route
 func TaskComplete(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	_, err := database.TaskComplete(params["id"])

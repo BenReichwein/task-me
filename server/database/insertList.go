@@ -8,10 +8,10 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-// Insert one task in the DB
-func InsertOneTask(task models.Task) (bool, error) {
-	filter := bson.M{"lists.list": bson.M{"$eq": "test4"}}
-	update := bson.M{"$push": bson.M{"lists.$.tasks": task}}
+// Insert one list in the DB
+func InsertOneList(list models.List, User string) (bool, error) {
+	filter := bson.M{"username": bson.M{"$eq": User}}
+	update := bson.M{"$push": bson.M{"lists": list}}
 	result, err := collection.UpdateOne(
         context.Background(),
         filter,
@@ -22,6 +22,6 @@ func InsertOneTask(task models.Task) (bool, error) {
 		return false, err
 	}
 
-	fmt.Println("Inserted a TASK Record ", result)
+	fmt.Println("Inserted a LIST Record ", result)
 	return true, nil
 }

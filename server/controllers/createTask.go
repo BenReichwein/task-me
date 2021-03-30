@@ -7,11 +7,11 @@ import (
 	"server/models"
 )
 
-// CreateTask create task route
+// create task route
 func CreateTask(w http.ResponseWriter, r *http.Request) {
-	var task models.ToDoList
+	var task models.Task
 	_ = json.NewDecoder(r.Body).Decode(&task)
-	_, err := database.InsertOneTask(task, Username)
+	_, err := database.InsertOneTask(task)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	} else {

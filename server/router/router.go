@@ -11,8 +11,9 @@ func Router() *mux.Router {
 
 	router := mux.NewRouter()
 
-	router.HandleFunc("/api/task", controllers.GetAllTask).Methods("GET", "OPTIONS")
+	router.HandleFunc("/api/data", controllers.GetData).Methods("GET", "OPTIONS")
 	router.HandleFunc("/api/getToken", controllers.GetToken).Methods("GET", "OPTIONS")
+	router.HandleFunc("/api/list", controllers.CreateList).Methods("POST", "OPTIONS")
 	router.HandleFunc("/api/task", controllers.CreateTask).Methods("POST", "OPTIONS")
 	router.HandleFunc("/api/user/login", controllers.LoginHandler).Methods("POST", "OPTIONS")
 	router.HandleFunc("/api/user/register", controllers.RegisterHandler).Methods("POST", "OPTIONS")
