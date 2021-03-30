@@ -12,13 +12,14 @@ type User struct{
 
 type List struct {
 	ID     primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
-	List   string             `json:"list,omitempty"`
+	List   string             `json:"list,omitempty"` // Need to make this unique
 	Tasks  []Task             `json:"tasks,omitempty" bson:"tasks,omitempty"`
 }
 
 type Task struct {
 	ID     primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
 	Task   string             `json:"task,omitempty"`
+	List   string             `json:"list,omitempty"`
 	Status bool               `json:"status,omitempty"`
 }
 

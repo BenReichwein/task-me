@@ -13,8 +13,9 @@ export const getData = () => async (dispatch) => {
   dispatch({ type: DATA, payload: response.data});
 };
 // creating task
-export const createTask = (task) => async (dispatch) => {
+export const createTask = (task, list) => async (dispatch) => {
     api.post('task', {
+      list,
       task
     })
     .then(async (res) => {

@@ -23,7 +23,7 @@ class Tasks extends Component {
 
     onSubmit = async () => {
         let { task } = this.state;
-        await this.props.createTask(task)
+        await this.props.createTask(task, this.props.data[this.props.match.params.id].list)
         this.props.getData();
       };
 

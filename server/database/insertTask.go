@@ -9,8 +9,8 @@ import (
 )
 
 // Insert one task in the DB
-func InsertOneTask(task models.Task) (bool, error) {
-	filter := bson.M{"lists.list": bson.M{"$eq": "test4"}}
+func InsertOneTask(task models.Task, list string) (bool, error) {
+	filter := bson.M{"lists.list": bson.M{"$eq": list}}
 	update := bson.M{"$push": bson.M{"lists.$.tasks": task}}
 	result, err := collection.UpdateOne(
         context.Background(),
