@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 //import Col from 'react-bootstrap/Col'
-import { getTasks, createTask, updateTask, undoTask, deleteTask } from '../../actions';
+import { getData, createTask, updateTask, undoTask, deleteTask } from '../../actions';
 
-class ToDo extends Component {
+class Tasks extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -24,15 +24,19 @@ class ToDo extends Component {
     onSubmit = async () => {
         let { task } = this.state;
         await this.props.createTask(task)
-        this.props.getTasks();
+        this.props.getData();
       };
 
     componentDidMount = async () => {
-      await this.props.getTasks();
+      await this.props.getData();
     }
 
     render() {
-      let {task} = this.props
+      let {data} = this.props
+      let tasks = []
+      if (data.length > 1) {
+        tasks = data[this.props.match.params.id].tasks
+      }
         return (
             <Container fluid style={{ 'marginTop': '5.5rem' }}>
                 <Row className="justify-content-around">
@@ -54,8 +58,8 @@ class ToDo extends Component {
                   </form>
                 </Row>
                 <Row>{this.state.items}</Row>
-                {task ?
-                task.map(item => (
+                {tasks ?
+                tasks.map(item => (
                   <Container key={item._id} style={item.status ? {color: 'green'} : {color: 'orange'}} fluid>
                       <Row>
                         <div style={item.status ? {textDecorationLine: 'line-through'} : {wordWrap: 'break-word'}}>{item.task}</div>
@@ -101,11 +105,11 @@ class ToDo extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        task: state.task,
+        data: state.data,
     }
 }
 
 export default connect(
   mapStateToProps,
-  { getTasks, createTask, updateTask, undoTask, deleteTask }
-)(ToDo);
+  { getData, createTask, updateTask, undoTask, deleteTask }
+)(Tasks);

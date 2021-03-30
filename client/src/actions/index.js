@@ -1,16 +1,16 @@
 import history from '../history'
 import api from './api'
 import {
-    TASK,
+  DATA,
 } from './types';
 //
 //-> Tasks
 //
-// gets all tasks
-export const getTasks = () => async (dispatch) => {
-  const response = await api.get('task')
+// gets all data from database
+export const getData = () => async (dispatch) => {
+  const response = await api.get('data')
 
-  dispatch({ type: TASK, payload: response.data});
+  dispatch({ type: DATA, payload: response.data});
 };
 // creating task
 export const createTask = (task) => async (dispatch) => {
@@ -18,7 +18,7 @@ export const createTask = (task) => async (dispatch) => {
       task
     })
     .then(async (res) => {
-      dispatch({ type: TASK, payload: res.data});
+      dispatch({ type: DATA, payload: res.data});
     })
     .catch(err => {
       alert(err.response.data)
@@ -29,7 +29,7 @@ export const updateTask = (id) => (dispatch) => {
   api.put(`task/${id}`)
   .then((res) => {
     console.log(res)
-    dispatch(getTasks())
+    dispatch(getData())
   })
   .catch(err => {
     alert(err.response.data)
@@ -40,7 +40,7 @@ export const undoTask = (id) => (dispatch) => {
   api.put(`undoTask/${id}`)
   .then((res) => {
     console.log(res)
-    dispatch(getTasks())
+    dispatch(getData())
   })
   .catch(err => {
     alert(err.response.data)
@@ -51,7 +51,7 @@ export const deleteTask = (id) => (dispatch) => {
   api.delete(`deleteTask/${id}`)
   .then((res) => {
     console.log(res)
-    dispatch(getTasks())
+    dispatch(getData())
   })
   .catch(err => {
     alert(err.response.data)
