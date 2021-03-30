@@ -26,8 +26,8 @@ export const createTask = (task, list) => async (dispatch) => {
     })
 };
 // update task
-export const updateTask = (id) => (dispatch) => {
-  api.put(`task/${id}`)
+export const updateTask = (list, task) => (dispatch) => {
+  api.put(`task/${list}/${task}`)
   .then((res) => {
     console.log(res)
     dispatch(getData())
@@ -37,8 +37,8 @@ export const updateTask = (id) => (dispatch) => {
   })
 };
 // undo task
-export const undoTask = (id) => (dispatch) => {
-  api.put(`undoTask/${id}`)
+export const undoTask = (list, task) => (dispatch) => {
+  api.put(`undoTask/${list}/${task}`)
   .then((res) => {
     console.log(res)
     dispatch(getData())
@@ -48,8 +48,8 @@ export const undoTask = (id) => (dispatch) => {
   })
 };
 // delete task
-export const deleteTask = (id) => (dispatch) => {
-  api.delete(`deleteTask/${id}`)
+export const deleteTask = (list, task) => (dispatch) => {
+  api.delete(`deleteTask/${list}/${task}`)
   .then((res) => {
     console.log(res)
     dispatch(getData())

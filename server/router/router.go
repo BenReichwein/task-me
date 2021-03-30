@@ -17,9 +17,9 @@ func Router() *mux.Router {
 	router.HandleFunc("/api/task", controllers.CreateTask).Methods("POST", "OPTIONS")
 	router.HandleFunc("/api/user/login", controllers.LoginHandler).Methods("POST", "OPTIONS")
 	router.HandleFunc("/api/user/register", controllers.RegisterHandler).Methods("POST", "OPTIONS")
-	router.HandleFunc("/api/task/{id}", controllers.TaskComplete).Methods("PUT", "OPTIONS")
-	router.HandleFunc("/api/undoTask/{id}", controllers.UndoTask).Methods("PUT", "OPTIONS")
-	router.HandleFunc("/api/deleteTask/{id}", controllers.DeleteTask).Methods("DELETE", "OPTIONS")
+	router.HandleFunc("/api/task/{list}/{id}", controllers.TaskComplete).Methods("PUT", "OPTIONS")
+	router.HandleFunc("/api/undoTask/{list}/{id}", controllers.UndoTask).Methods("PUT", "OPTIONS")
+	router.HandleFunc("/api/deleteTask/{list}/{id}", controllers.DeleteTask).Methods("DELETE", "OPTIONS")
 	router.HandleFunc("/api/deleteAllTask", controllers.DeleteAllTask).Methods("DELETE", "OPTIONS")
 	return router
 }

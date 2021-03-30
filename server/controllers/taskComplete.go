@@ -4,13 +4,14 @@ import (
 	"encoding/json"
 	"net/http"
 	"server/database"
+
 	"github.com/gorilla/mux"
 )
 
 // update task route
 func TaskComplete(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	_, err := database.TaskComplete(params["id"])
+	_, err := database.TaskComplete(params["list"],params["id"])
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	} else {

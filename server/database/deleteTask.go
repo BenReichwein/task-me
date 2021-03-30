@@ -2,27 +2,28 @@ package database
 
 import (
 	"context"
-	"log"
 	"fmt"
 	
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 // delete one task from the DB, delete by ID
-func DeleteOneTask(task string) (bool, error) {
-	fmt.Println(task)
-	id, e := primitive.ObjectIDFromHex(task)
-	if e != nil {
-		// Cant do anything without id so exits program
-		log.Fatal(e)
+func DeleteOneTask(list string, task string) (bool, error) {
+	// Un sets array and turns to nil
+	filter := bson.M{"lists.list": bson.M{"$eq": list}}
+	update := bson.M{"$unset": bson.M{"lists.$.tasks."+task: task}}
+	_, err := collection.UpdateOne(context.Background(), filter, update)
+	if err != nil {
+		return false, err
 	}
-	filter := bson.M{"_id": id}
-	d, err := collection.DeleteOne(context.Background(), filter)
+	// removes all arrays that have value of nil
+	fil := bson.M{"lists.list": bson.M{"$eq": list}}
+	upd := bson.M{"$pull": bson.M{"lists.$.tasks": nil}}
+	result, err := collection.UpdateOne(context.Background(), fil, upd)
 	if err != nil {
 		return false, err
 	}
 
-	fmt.Println("Deleted Document", d.DeletedCount)
+	fmt.Println("Deleted Document", result.ModifiedCount)
 	return true, nil
 }

@@ -10,7 +10,7 @@ import (
 // delete one task route
 func DeleteTask(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	_, err := database.DeleteOneTask(params["id"])
+	_, err := database.DeleteOneTask(params["list"],params["id"])
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	} else {

@@ -59,7 +59,7 @@ class Tasks extends Component {
                 </Row>
                 <Row>{this.state.items}</Row>
                 {tasks ?
-                tasks.map(item => (
+                tasks.map((item, index) => (
                   <Container key={item._id} style={item.status ? {color: 'green'} : {color: 'orange'}} fluid>
                       <Row>
                         <div style={item.status ? {textDecorationLine: 'line-through'} : {wordWrap: 'break-word'}}>{item.task}</div>
@@ -68,7 +68,7 @@ class Tasks extends Component {
                       <Row>
                         <button
                         style={{ marginRight: 10, color: 'green'}}
-                        onClick={() => this.props.updateTask(item._id)}
+                        onClick={() => this.props.updateTask(item.list, index)}
                         >
                         <i
                           className="fas fa-check"
@@ -77,7 +77,7 @@ class Tasks extends Component {
                         </button>
                         <button
                         style={{ marginRight: 10, color: 'orange'}}
-                        onClick={() => this.props.undoTask(item._id)}
+                        onClick={() => this.props.undoTask(item.list, index)}
                         >
                         <i
                           className="fas fa-undo"
@@ -86,7 +86,7 @@ class Tasks extends Component {
                         </button>
                         <button
                         style={{ marginRight: 10, color: 'orangered'}}
-                        onClick={() => this.props.deleteTask(item._id)}
+                        onClick={() => this.props.deleteTask(item.list, index)}
                         >
                         <i
                           className="fas fa-trash"

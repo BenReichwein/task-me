@@ -10,7 +10,7 @@ import (
 // undo the complete task route
 func UndoTask(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	_, err := database.UndoTask(params["id"])
+	_, err := database.UndoTask(params["list"], params["id"])
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	} else {

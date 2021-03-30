@@ -5,15 +5,12 @@ import (
 	"fmt"
 
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 // task complete method, update task's status to true
-func TaskComplete(task string) (bool, error) {
-	fmt.Println(task)
-	id, _ := primitive.ObjectIDFromHex(task)
-	filter := bson.M{"_id": id}
-	update := bson.M{"$set": bson.M{"status": true}}
+func TaskComplete(list string, task string) (bool, error) {
+	filter := bson.M{"lists.list": bson.M{"$eq": list}}
+	update := bson.M{"$set": bson.M{"lists.$.tasks."+task+".status": true}}
 	result, err := collection.UpdateOne(context.Background(), filter, update)
 	if err != nil {
 		return false, err
