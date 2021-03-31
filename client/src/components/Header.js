@@ -27,7 +27,7 @@ class Header extends Component {
             <React.Fragment>
                 {this.state.seen? <CreateList toggle={this.toggleShare}/> : null}
                 <SideNav
-                style={{background: 'linear-gradient(90deg, rgb(255, 127, 60) 0%, rgb(255, 128, 0) 100%)'}}
+                style={{background: '#4E4C5B'}}
                 expanded={this.state.expand}
                 onSelect={(selected) => {
                     if (selected === "new") {
@@ -70,7 +70,7 @@ class Header extends Component {
                                 <i className="fa fa-plus-square" style={{ fontSize: '1.75em', padding: '10px 10px 10px 10px', borderRadius:'10px', backgroundColor: 'orange' }} />
                             </NavIcon>
                             <NavText>
-                                <h3 style={{paddingTop: '10px', marginTop: '50px'}}>
+                                <h3 style={{marginTop: '50px'}}>
                                     CREATE
                                 </h3>
                             </NavText>

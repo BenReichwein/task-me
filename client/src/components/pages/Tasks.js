@@ -9,8 +9,7 @@ class Tasks extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            task: '',
-            items: []
+            task: ''
         };
     }
     
@@ -34,14 +33,16 @@ class Tasks extends Component {
     render() {
       let {data} = this.props
       let tasks = []
+      let list = ""
       if (data.length > this.props.match.params.id) {
         tasks = data[this.props.match.params.id].tasks
+        list = data[this.props.match.params.id].list
       }
         return (
             <Container fluid style={{ 'marginTop': '5.5rem' }}>
                 <Row className="justify-content-around">
                   <h2 className="header">
-                      TO DO LIST
+                      {list}
                   </h2>
                   <button
                   style={{ marginRight: 10, color: 'orangered'}}
