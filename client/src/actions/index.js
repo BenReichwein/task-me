@@ -12,6 +12,18 @@ export const getData = () => async (dispatch) => {
 
   dispatch({ type: DATA, payload: response.data});
 };
+// creating list
+export const createList = (list) => async (dispatch) => {
+  api.post('list', {
+    list
+  })
+  .then(async (res) => {
+    dispatch(getData())
+  })
+  .catch(err => {
+    alert(err.response.data)
+  })
+};
 // creating task
 export const createTask = (task, list) => async (dispatch) => {
     api.post('task', {
@@ -29,7 +41,6 @@ export const createTask = (task, list) => async (dispatch) => {
 export const updateTask = (list, task) => (dispatch) => {
   api.put(`task/${list}/${task}`)
   .then((res) => {
-    console.log(res)
     dispatch(getData())
   })
   .catch(err => {
@@ -40,7 +51,6 @@ export const updateTask = (list, task) => (dispatch) => {
 export const undoTask = (list, task) => (dispatch) => {
   api.put(`undoTask/${list}/${task}`)
   .then((res) => {
-    console.log(res)
     dispatch(getData())
   })
   .catch(err => {
@@ -51,7 +61,6 @@ export const undoTask = (list, task) => (dispatch) => {
 export const deleteTask = (list, task) => (dispatch) => {
   api.delete(`deleteTask/${list}/${task}`)
   .then((res) => {
-    console.log(res)
     dispatch(getData())
   })
   .catch(err => {

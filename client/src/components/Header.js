@@ -2,14 +2,20 @@ import React, { Component } from 'react'
 import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import { connect } from 'react-redux';
 import { getData } from '../actions';
+import CreateList from './CreateList'
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 class Header extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            expand: false
+            expand: false,
+            seen: false
         };
+    }
+
+    toggleShare = () => {
+        this.setState({seen: !this.state.seen})
     }
 
     componentDidMount = async () => {
@@ -19,13 +25,21 @@ class Header extends Component {
         let {data} = this.props
         return (
             <React.Fragment>
+                {this.state.seen? <CreateList toggle={this.toggleShare}/> : null}
                 <SideNav
                 style={{background: 'linear-gradient(90deg, rgb(255, 127, 60) 0%, rgb(255, 128, 0) 100%)'}}
                 expanded={this.state.expand}
                 onSelect={(selected) => {
-                    const to = '/list/' + selected;
-                    this.props.history.push(to);
-                    this.setState({expand: false})
+                    if (selected === "new") {
+                        this.setState({
+                            expand: false,
+                            seen: true
+                        })
+                    } else {
+                        const to = '/list/' + selected;
+                        this.props.history.push(to);
+                        this.setState({expand: false})
+                    }
                 }}
                 onToggle={(expanded) => this.setState({expand: expanded})}
                 >
@@ -51,6 +65,16 @@ class Header extends Component {
                             </NavText>
                         </NavItem>
                         }
+                        <NavItem eventKey="new">
+                            <NavIcon>
+                                <i className="fa fa-plus-square" style={{ fontSize: '1.75em', padding: '10px 10px 10px 10px', borderRadius:'10px', backgroundColor: 'orange' }} />
+                            </NavIcon>
+                            <NavText>
+                                <h3 style={{paddingTop: '10px', marginTop: '50px'}}>
+                                    CREATE
+                                </h3>
+                            </NavText>
+                        </NavItem>
                     </SideNav.Nav>
                 </SideNav>
             </React.Fragment>
