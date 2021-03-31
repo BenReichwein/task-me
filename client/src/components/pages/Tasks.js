@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 //import Col from 'react-bootstrap/Col'
-import { getData, createTask, updateTask, undoTask, deleteTask } from '../../actions';
+import { getData, createTask, updateTask, undoTask, deleteTask, deleteList } from '../../actions';
 
 class Tasks extends Component {
     constructor(props) {
@@ -34,7 +34,7 @@ class Tasks extends Component {
     render() {
       let {data} = this.props
       let tasks = []
-      if (data.length > 1) {
+      if (data.length > this.props.match.params.id) {
         tasks = data[this.props.match.params.id].tasks
       }
         return (
@@ -43,6 +43,14 @@ class Tasks extends Component {
                   <h2 className="header">
                       TO DO LIST
                   </h2>
+                  <button
+                  style={{ marginRight: 10, color: 'orangered'}}
+                  onClick={() => this.props.deleteList(this.props.match.params.id)}
+                  >
+                  <i
+                    className="fas fa-trash"
+                  />
+                  </button>
                 </Row>
                 <Row className="justify-content-around">
                   <form onSubmit={this.onSubmit}>
@@ -111,5 +119,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { getData, createTask, updateTask, undoTask, deleteTask }
+  { getData, createTask, updateTask, undoTask, deleteTask, deleteList }
 )(Tasks);

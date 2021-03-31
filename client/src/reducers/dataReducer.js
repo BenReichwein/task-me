@@ -6,7 +6,13 @@ import {
 export default (state = [], action) => {
     switch (action.type) {
         case DATA:
-            return action.payload[0].lists;
+            if (action.payload[0]) {
+                if (action.payload[0].lists) {
+                    return action.payload[0].lists;
+                }
+                return action.payload[0];
+            }
+            return action.payload;
         default:
             return state;
     }

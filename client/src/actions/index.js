@@ -57,6 +57,16 @@ export const undoTask = (list, task) => (dispatch) => {
     alert(err.response.data)
   })
 };
+// delete list
+export const deleteList = (list) => (dispatch) => {
+  api.delete(`deleteList/${list}`)
+  .then((res) => {
+    dispatch(getData())
+  })
+  .catch(err => {
+    alert(err.response.data)
+  })
+};
 // delete task
 export const deleteTask = (list, task) => (dispatch) => {
   api.delete(`deleteTask/${list}/${task}`)
