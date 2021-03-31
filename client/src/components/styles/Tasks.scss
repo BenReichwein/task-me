@@ -1,0 +1,48 @@
+.header {
+    text-align: center;
+    font-size: 2rem;
+    color: #909090;
+}
+
+.listDelete {
+    color: orangered;
+    position: absolute;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    float: right;
+    margin: -2rem 0rem;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.edits {
+    color: orangered;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.circle {
+    border-radius: 50%;
+    margin-right: 10px;
+    padding-top: 0.1rem;
+    padding-right: 1.2rem;
+}
+
+input[name="task"] {
+    background-color: transparent;
+    color: #acacac;
+    outline: none;
+    outline-style: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid #909090 1px;
+    padding: 3px 10px;
+}

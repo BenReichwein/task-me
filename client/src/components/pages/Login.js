@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { login } from '../../actions';
-import avatar from '../assets/avatarimage.jpg'
+import avatar from '../assets/login.svg'
 import "../styles/Auth.scss"
 
 class Login extends Component {
