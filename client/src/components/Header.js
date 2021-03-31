@@ -49,7 +49,7 @@ class Header extends Component {
                         data.map((item, index) => (
                             <NavItem eventKey={index}>
                                 <NavIcon>
-                                    <i className="fa fa-bolt" style={{ fontSize: '1.75em' }} />
+                                    <i className={item.icon} style={{ fontSize: '1.75em' }} />
                                 </NavIcon>
                                 <NavText>
                                     {item.list}

@@ -13,9 +13,10 @@ export const getData = () => async (dispatch) => {
   dispatch({ type: DATA, payload: response.data});
 };
 // creating list
-export const createList = (list) => async (dispatch) => {
+export const createList = (list, icon) => async (dispatch) => {
   api.post('list', {
-    list
+    list,
+    icon
   })
   .then(async (res) => {
     dispatch(getData())
