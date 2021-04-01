@@ -6,6 +6,7 @@ import withAuth from './withAuth'
 import Tasks from './pages/Tasks'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import Home from './pages/Home'
 import './styles/App.scss'
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
         <Header history={history}/>
         <div style={{marginLeft: '80px'}}>
           <Switch>
+            <Route path="/" exact component={withAuth(Home)} />
             <Route path="/list/:id" exact component={withAuth(Tasks)} />
             <Route path="/login" exact component={Login} />
             <Route path="/register" exact component={Register} />

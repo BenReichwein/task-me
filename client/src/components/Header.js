@@ -31,6 +31,7 @@ class Header extends Component {
                 expanded={this.state.expand}
                 onSelect={(selected) => {
                     if (selected === "new") {
+                        this.props.history.push('/')
                         this.setState({
                             expand: false,
                             seen: true
