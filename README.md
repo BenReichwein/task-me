@@ -1,5 +1,5 @@
-# Workout Boost | API
-> REST API - Typescript, Express, Mongodb
+# TASK ME
+> Task Manager - React, Redux, Javascript, Golang, Mux Router, Mongodb
 
 ## Table of Contents
 
