@@ -4,8 +4,8 @@
 ## Table of Contents
 
 - [Installation](#installation)
-- [Quick Start Server](#Quick-Start-server)
-- [Quick Start Client](#Quick-Start-client)
+- [Quick Start Server](#quick-start---server)
+- [Quick Start Client](#Quick-Start--client)
 - [Developer](#developer)
 
 ## Installation
