@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { createList } from '../actions';
+import './styles/List.scss'
 
 class CreateList extends Component {
     constructor(props) {
@@ -39,23 +40,23 @@ class CreateList extends Component {
 
     render() {
         return (
-            <div className="share-modal" style={{marginLeft: "100px"}}>
-                <div className="share-modal-content">
+            <div className="list-modal">
+                <div className="list-modal-content">
                     <span className="close" onClick={this.handleClick}>&times;</span>
                     <hr className="hr" />
                     <div onChange={this.setIcon.bind(this)}>
-                        <input type="radio" value="fas fa-school" name="icon"/> <i className="fas fa-school"/>
-                        <input type="radio" value="fas fa-briefcase" name="icon"/> <i className="fas fa-briefcase"/>
-                        <input type="radio" value="fas fa-building" name="icon"/> <i className="fas fa-building"/>
-                        <input type="radio" value="fas fa-tools" name="icon"/> <i className="fas fa-tools"/>
-                        <input type="radio" value="fas fa-wrench" name="icon"/> <i className="fas fa-wrench"/>
-                        <input type="radio" value="fas fa-car" name="icon"/> <i className="fas fa-car"/>
-                        <input type="radio" value="fas fa-biking" name="icon"/> <i className="fas fa-biking"/>
-                        <input type="radio" value="fas fa-heartbeat" name="icon"/> <i className="fas fa-heartbeat"/>
-                        <input type="radio" value="fas fa-book" name="icon"/> <i className="fas fa-book"/>
-                        <input type="radio" value="fas fa-coins" name="icon"/> <i className="fas fa-coins"/>
-                        <input type="radio" value="fas fa-desktop" name="icon"/> <i className="fas fa-desktop"/>
-                        <input type="radio" value="fab fa-d-and-d" name="icon"/> <i className="fab fa-d-and-d"/>
+                        <input type="radio" value="fas fa-school" name="icon"/><i className="fas fa-school"/>
+                        <input type="radio" value="fas fa-briefcase" name="icon"/><i className="fas fa-briefcase"/>
+                        <input type="radio" value="fas fa-building" name="icon"/><i className="fas fa-building"/>
+                        <input type="radio" value="fas fa-tools" name="icon"/><i className="fas fa-tools"/>
+                        <input type="radio" value="fas fa-wrench" name="icon"/><i className="fas fa-wrench"/>
+                        <input type="radio" value="fas fa-car" name="icon"/><i className="fas fa-car"/>
+                        <input type="radio" value="fas fa-biking" name="icon"/><i className="fas fa-biking"/>
+                        <input type="radio" value="fas fa-heartbeat" name="icon"/><i className="fas fa-heartbeat"/>
+                        <input type="radio" value="fas fa-book" name="icon"/><i className="fas fa-book"/>
+                        <input type="radio" value="fas fa-coins" name="icon"/><i className="fas fa-coins"/>
+                        <input type="radio" value="fas fa-desktop" name="icon"/><i className="fas fa-desktop"/>
+                        <input type="radio" value="fab fa-d-and-d" name="icon"/><i className="fab fa-d-and-d"/>
                     </div>
                     <input
                     name="title"
@@ -65,7 +66,7 @@ class CreateList extends Component {
                     required
                     />
                     <br/>
-                    <button className="publish" onClick={this.onSubmit}>Create</button>
+                    <button className="create" onClick={this.onSubmit}>Create</button>
                 </div>
             </div>
         );
