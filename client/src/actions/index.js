@@ -105,6 +105,7 @@ export const login = (formValues) => () => {
     history.push('/')
   })
   .catch(err => {
+    console.log(err)
     alert(err.response.data)
   })
 };

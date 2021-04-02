@@ -25,13 +25,12 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err != nil {
-		res.Error = err.Error()
-		json.NewEncoder(w).Encode(res)
+		http.Error(w, "Error, Try Again", http.StatusForbidden)
 		return
 	}
 	res = database.Register(user)
 	if res.Error != "" {
-		json.NewEncoder(w).Encode(res.Error)
+		http.Error(w, res.Error, http.StatusForbidden)
 	} else {
 		json.NewEncoder(w).Encode(res.Result)
 	}
@@ -55,7 +54,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
 	result, res := database.Login(user)
 	if res.Error != "" {
-		json.NewEncoder(w).Encode(res)
+		http.Error(w, res.Error, http.StatusForbidden)
 	} else {
 		c := &http.Cookie{
 			Name: "authToken",
