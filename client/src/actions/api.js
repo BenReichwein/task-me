@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // This makes it so we can use shortened url with api calls
 export default axios.create({
-  baseURL: `http://localhost:8080/api/`,
+  baseURL: `https://taskme200.wl.r.appspot.com/api/`,
   withCredentials: true,
   mode: 'cors',
   headers: {

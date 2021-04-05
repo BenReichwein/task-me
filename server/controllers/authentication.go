@@ -59,10 +59,10 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		c := &http.Cookie{
 			Name: "authToken",
 			Value: result.Token,
-			Domain: "localhost",
 			Path: "/",
 			HttpOnly: true,
         	Secure:   true,
+			SameSite: http.SameSiteNoneMode,
 		}
 		http.SetCookie(w, c)
 		json.NewEncoder(w).Encode(result)
