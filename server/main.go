@@ -20,7 +20,7 @@ func main() {
 	database.Connect()
 
 	c := cors.New(cors.Options{
-        AllowedOrigins: []string{"http://localhost:3000"},
+        AllowedOrigins: []string{"http://localhost:3000", "https://taskme200.web.app"},
 		AllowedMethods: []string{"GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS"},
         AllowCredentials: true,
 		AllowedHeaders: []string{"X-Requested-With", "Content-Type"},
