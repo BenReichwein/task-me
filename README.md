@@ -19,6 +19,7 @@ npm install
 ## Quick Start - SERVER
 ```
 # Start Development
+cd server
 go run .
 
 ### Make a .ENV in /server (check out .env.template)
@@ -31,13 +32,8 @@ DB_COLLECTION_NAME="todolist"
 ## Quick Start - CLIENT
 ```
 # Start Development
-npm run dev
-
-# Build API
-npm run build
-
-# Start API
-npm run start
+cd client
+npm start
 ```
 
 ## Developer
